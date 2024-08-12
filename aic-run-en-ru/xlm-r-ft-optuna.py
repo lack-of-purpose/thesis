@@ -1,23 +1,27 @@
+import wandb
 import pandas as pd
 import csv
 import torch
 import datasets
-from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trainer, TrainingArguments
+from transformers import XLMRobertaTokenizer, AutoModelForSequenceClassification, Trainer, TrainingArguments
 from sklearn.metrics import matthews_corrcoef, roc_auc_score
 import optuna
+from optuna.samplers import TPESampler
 import os
 
-#os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+os.environ["WANDB_PROJECT"]="xlm-r-ft-optuna-95-100"
+os.environ["WANDB_LOG_MODEL"]="false"
+os.environ["WANDB_WATCH"]="false"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-os.environ["WANDB_MODE"] = "disabled"
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:2048"
 
 def preprocess_function(examples):
-    return tokenizer(examples["source"], examples["target"], padding=False, truncation=True)
+    return tokenizer(examples["target"], padding=True, truncation=True)
 
 def model_init(trial):
     return AutoModelForSequenceClassification.from_pretrained(
         model_checkpoint,
+        num_labels=2,
         from_tf=bool(".ckpt" in model_checkpoint)
     )
 
@@ -29,10 +33,9 @@ def compute_metrics(pred):
     return {"roc_auc": roc_auc, "mcc": matt}
 
 def objective(trial):
-    torch.cuda.empty_cache()
-    per_device_train_batch_size = trial.suggest_categorical("per_device_train_batch_size", [16, 32])
     args = TrainingArguments(
         f"{model_name}-finetuned",
+        report_to="wandb",
         evaluation_strategy="steps",
         save_strategy="no",
         eval_steps=100,
@@ -41,13 +44,13 @@ def objective(trial):
         push_to_hub=False,
         seed=42,
         lr_scheduler_type='constant_with_warmup',
-        learning_rate=trial.suggest_loguniform("learning_rate", 1e-6, 1e-4),
-        weight_decay=trial.suggest_loguniform("weight_decay", 1e-6, 5e-4),
+        learning_rate=trial.suggest_loguniform("learning_rate", 1e-06, 9e-04),
+        weight_decay=trial.suggest_loguniform("weight_decay", 1e-02, 5e-01),
         warmup_steps=trial.suggest_categorical("warmup_steps", [500, 700, 1000]),
-        per_device_train_batch_size=per_device_train_batch_size
+        gradient_accumulation_steps=trial.suggest_categorical("gradient_accumulation_steps", [4, 8]),
+        per_device_eval_batch_size=8,
+        per_device_train_batch_size=8
     )
-    
-    args.per_device_eval_batch_size = per_device_train_batch_size
 
     trainer = Trainer(
         args=args,
@@ -57,20 +60,27 @@ def objective(trial):
         compute_metrics=compute_metrics,
         model_init=model_init
     )
+    config = dict(trial.params)
+    config["trial.number"] = trial.number
+    wandb.init(project="xlm-r-ft-optuna-95-100", config=config, reinit=True) 
 
     trainer.train()
     metrics = trainer.evaluate()
-    return metrics["eval_loss"]
+    return metrics["eval_roc_auc"]
 
 if __name__ == "__main__":
     model_checkpoint = "xlm-roberta-base"
-    df_train = pd.read_csv('training-ru-95-src-tgt.csv', sep='|', quoting=csv.QUOTE_NONE, encoding='utf-8')
-    df_test = pd.read_csv('test-ru-95-src-tgt.csv', sep='|', encoding='utf-8')
-    df_val = pd.read_csv('validation-ru-95-src-tgt.csv', sep='|', encoding='utf-8')
+    df_train = pd.read_csv('training--95-tgt.csv', sep='|', quoting=csv.QUOTE_NONE, encoding='utf-8')
+    df_test = pd.read_csv('test--95-tgt.csv', sep='|', encoding='utf-8')
+    df_val = pd.read_csv('validation--95-tgt.csv', sep='|', encoding='utf-8')
 
     df_train['labels'] = df_train['labels'].map({'mt': 0, 'human': 1})
     df_test['labels'] = df_test['labels'].map({'mt': 0, 'human': 1})
     df_val['labels'] = df_val['labels'].map({'mt': 0, 'human': 1})
+
+    df_train['target'] = ('<s>' + df_train['target'] + '</s>')
+    df_test['target'] = ('<s>' + df_test['target'] + '</s>')
+    df_val['target'] = ('<s>' + df_val['target'] + '</s>')
 
     dataset = datasets.DatasetDict({
         "train": datasets.Dataset.from_pandas(df_train),
@@ -78,17 +88,14 @@ if __name__ == "__main__":
         "val": datasets.Dataset.from_pandas(df_val),
     })
 
-    tokenizer = AutoTokenizer.from_pretrained(model_checkpoint, use_fast=True)
+    tokenizer = XLMRobertaTokenizer.from_pretrained(model_checkpoint, use_fast=True) 
     encoded_dataset = dataset.map(preprocess_function, batched=True, batch_size=None)
-
     num_labels = 2
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = (AutoModelForSequenceClassification.from_pretrained(model_checkpoint, num_labels=num_labels).to(device))
-
     model_name = model_checkpoint.split("/")[-1]
 
-    study = optuna.create_study(direction="minimize")
-    study.optimize(objective, n_trials=30)
+    study = optuna.create_study(direction="maximize", sampler=TPESampler())
+    study.optimize(objective, n_trials=100)
 
     print("Study statistics:")
     print("  Number of finished trials:", len(study.trials))
