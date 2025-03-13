@@ -1,0 +1,208 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  score   R-squared:                       0.017
+Model:                            OLS   Adj. R-squared:                  0.016
+Method:                 Least Squares   F-statistic:                     19.60
+Date:                Mon, 02 Dec 2024   Prob (F-statistic):           1.32e-56
+Time:                        19:35:31   Log-Likelihood:                 341.83
+No. Observations:               17762   AIC:                            -649.7
+Df Residuals:                   17745   BIC:                            -517.3
+Df Model:                          16                                         
+Covariance Type:            nonrobust                                         
+=========================================================================================
+                            coef    std err          t      P>|t|      [0.025      0.975]
+-----------------------------------------------------------------------------------------
+Intercept                 0.0452      0.010      4.699      0.000       0.026       0.064
+C(upos, Sum)[S.ADJ]       0.0257      0.011      2.270      0.023       0.004       0.048
+C(upos, Sum)[S.ADP]      -0.0256      0.011     -2.337      0.019      -0.047      -0.004
+C(upos, Sum)[S.ADV]      -0.0494      0.013     -3.789      0.000      -0.075      -0.024
+C(upos, Sum)[S.AUX]      -0.0282      0.018     -1.547      0.122      -0.064       0.008
+C(upos, Sum)[S.CCONJ]    -0.0420      0.014     -3.075      0.002      -0.069      -0.015
+C(upos, Sum)[S.DET]      -0.0585      0.014     -4.110      0.000      -0.086      -0.031
+C(upos, Sum)[S.INTJ]      0.1446      0.129      1.120      0.263      -0.109       0.398
+C(upos, Sum)[S.NOUN]      0.0101      0.010      0.992      0.321      -0.010       0.030
+C(upos, Sum)[S.NUM]      -0.0247      0.015     -1.638      0.101      -0.054       0.005
+C(upos, Sum)[S.PART]     -0.0280      0.016     -1.708      0.088      -0.060       0.004
+C(upos, Sum)[S.PRON]     -0.0336      0.012     -2.826      0.005      -0.057      -0.010
+C(upos, Sum)[S.PROPN]     0.0414      0.012      3.559      0.000       0.019       0.064
+C(upos, Sum)[S.PUNCT]     0.0459      0.010      4.391      0.000       0.025       0.066
+C(upos, Sum)[S.SCONJ]    -0.0428      0.014     -3.127      0.002      -0.070      -0.016
+C(upos, Sum)[S.SYM]       0.0688      0.063      1.099      0.272      -0.054       0.192
+C(upos, Sum)[S.VERB]     -0.0056      0.011     -0.525      0.600      -0.027       0.015
+==============================================================================
+Omnibus:                    32828.645   Durbin-Watson:                   1.933
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):        289303788.789
+Skew:                         -13.101   Prob(JB):                         0.00
+Kurtosis:                     627.676   Cond. No.                         79.4
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  score   R-squared:                       0.015
+Model:                            OLS   Adj. R-squared:                  0.013
+Method:                 Least Squares   F-statistic:                     7.136
+Date:                Mon, 02 Dec 2024   Prob (F-statistic):           1.57e-37
+Time:                        19:35:40   Log-Likelihood:                 324.61
+No. Observations:               17762   AIC:                            -569.2
+Df Residuals:                   17722   BIC:                            -257.8
+Df Model:                          39                                         
+Covariance Type:            nonrobust                                         
+===================================================================================================
+                                      coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------------------------
+Intercept                           0.0396      0.011      3.611      0.000       0.018       0.061
+C(deprel, Sum)[S.acl]               0.0246      0.019      1.271      0.204      -0.013       0.063
+C(deprel, Sum)[S.acl:relcl]         0.0014      0.021      0.067      0.946      -0.039       0.042
+C(deprel, Sum)[S.advcl]             0.0117      0.017      0.674      0.500      -0.022       0.046
+C(deprel, Sum)[S.advmod]           -0.0269      0.014     -1.911      0.056      -0.054       0.001
+C(deprel, Sum)[S.amod]              0.0331      0.013      2.589      0.010       0.008       0.058
+C(deprel, Sum)[S.appos]             0.0573      0.019      3.013      0.003       0.020       0.095
+C(deprel, Sum)[S.aux]              -0.0004      0.039     -0.010      0.992      -0.077       0.076
+C(deprel, Sum)[S.aux:pass]         -0.0355      0.027     -1.307      0.191      -0.089       0.018
+C(deprel, Sum)[S.case]             -0.0202      0.012     -1.651      0.099      -0.044       0.004
+C(deprel, Sum)[S.cc]               -0.0374      0.015     -2.535      0.011      -0.066      -0.008
+C(deprel, Sum)[S.ccomp]            -0.0114      0.020     -0.575      0.565      -0.050       0.028
+C(deprel, Sum)[S.compound]          0.1096      0.164      0.667      0.505      -0.212       0.432
+C(deprel, Sum)[S.conj]             -0.0127      0.014     -0.905      0.365      -0.040       0.015
+C(deprel, Sum)[S.cop]              -0.0208      0.027     -0.772      0.440      -0.074       0.032
+C(deprel, Sum)[S.csubj]             0.0301      0.035      0.862      0.389      -0.038       0.098
+C(deprel, Sum)[S.csubj:pass]       -0.0902      0.164     -0.549      0.583      -0.412       0.232
+C(deprel, Sum)[S.det]              -0.0546      0.016     -3.475      0.001      -0.085      -0.024
+C(deprel, Sum)[S.discourse]        -0.1399      0.104     -1.342      0.180      -0.344       0.064
+C(deprel, Sum)[S.expl]              0.0154      0.065      0.237      0.813      -0.112       0.143
+C(deprel, Sum)[S.fixed]            -0.0391      0.018     -2.134      0.033      -0.075      -0.003
+C(deprel, Sum)[S.flat]             -0.0297      0.057     -0.518      0.604      -0.142       0.083
+C(deprel, Sum)[S.flat:foreign]      0.0479      0.017      2.758      0.006       0.014       0.082
+C(deprel, Sum)[S.flat:name]         0.0369      0.022      1.689      0.091      -0.006       0.080
+C(deprel, Sum)[S.iobj]              0.0240      0.024      1.019      0.308      -0.022       0.070
+C(deprel, Sum)[S.mark]             -0.0392      0.015     -2.601      0.009      -0.069      -0.010
+C(deprel, Sum)[S.nmod]              0.0135      0.012      1.091      0.275      -0.011       0.038
+C(deprel, Sum)[S.nsubj]             0.0081      0.013      0.641      0.522      -0.017       0.033
+C(deprel, Sum)[S.nsubj:pass]        0.0062      0.023      0.276      0.783      -0.038       0.050
+C(deprel, Sum)[S.nummod]           -0.0152      0.019     -0.811      0.417      -0.052       0.021
+C(deprel, Sum)[S.nummod:entity]     0.0113      0.056      0.202      0.840      -0.098       0.121
+C(deprel, Sum)[S.nummod:gov]       -0.0527      0.040     -1.312      0.189      -0.131       0.026
+C(deprel, Sum)[S.obj]               0.0204      0.014      1.444      0.149      -0.007       0.048
+C(deprel, Sum)[S.obl]               0.0049      0.013      0.384      0.701      -0.020       0.030
+C(deprel, Sum)[S.obl:agent]        -0.0458      0.164     -0.279      0.781      -0.368       0.276
+C(deprel, Sum)[S.obl:tmod]          0.0513      0.134      0.382      0.702      -0.212       0.315
+C(deprel, Sum)[S.orphan]            0.1046      0.232      0.450      0.652      -0.350       0.559
+C(deprel, Sum)[S.parataxis]        -0.0055      0.018     -0.306      0.760      -0.041       0.030
+C(deprel, Sum)[S.punct]             0.0519      0.012      4.410      0.000       0.029       0.075
+C(deprel, Sum)[S.root]              0.0026      0.014      0.187      0.851      -0.024       0.029
+==============================================================================
+Omnibus:                    32789.800   Durbin-Watson:                   1.934
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):        286789972.884
+Skew:                         -13.067   Prob(JB):                         0.00
+Kurtosis:                     624.954   Cond. No.                         136.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  score   R-squared:                       0.001
+Model:                            OLS   Adj. R-squared:                  0.000
+Method:                 Least Squares   F-statistic:                     1.515
+Date:                Mon, 02 Dec 2024   Prob (F-statistic):              0.169
+Time:                        19:35:43   Log-Likelihood:                 190.78
+No. Observations:               17762   AIC:                            -367.6
+Df Residuals:                   17755   BIC:                            -313.1
+Df Model:                           6                                         
+Covariance Type:            nonrobust                                         
+=======================================================================================
+                          coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------------
+Intercept               0.0519      0.003     18.089      0.000       0.046       0.057
+C(case, Sum)[S.0]      -0.0083      0.004     -2.359      0.018      -0.015      -0.001
+C(case, Sum)[S.Acc]    -0.0044      0.006     -0.749      0.454      -0.016       0.007
+C(case, Sum)[S.Dat]     0.0010      0.011      0.092      0.927      -0.020       0.022
+C(case, Sum)[S.Gen]    -0.0014      0.005     -0.268      0.789      -0.012       0.009
+C(case, Sum)[S.Ins]     0.0047      0.008      0.562      0.574      -0.012       0.021
+C(case, Sum)[S.Loc]     0.0023      0.008      0.302      0.762      -0.013       0.017
+==============================================================================
+Omnibus:                    32581.241   Durbin-Watson:                   1.934
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):        275239155.855
+Skew:                         -12.887   Prob(JB):                         0.00
+Kurtosis:                     612.294   Cond. No.                         7.45
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+
+OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  score   R-squared:                       0.002
+Model:                            OLS   Adj. R-squared:                  0.002
+Method:                 Least Squares   F-statistic:                     10.78
+Date:                Mon, 10 Mar 2025   Prob (F-statistic):           4.49e-07
+Time:                        19:35:58   Log-Likelihood:                 202.39
+No. Observations:               17762   AIC:                            -396.8
+Df Residuals:                   17758   BIC:                            -365.7
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+=======================================================================================
+                          coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------------
+Intercept               0.0746      0.005     14.149      0.000       0.064       0.085
+C(ner, Sum)[S.LOC]      0.0112      0.011      1.029      0.304      -0.010       0.032
+C(ner, Sum)[S.NONE]    -0.0294      0.005     -5.422      0.000      -0.040      -0.019
+C(ner, Sum)[S.ORG]     -0.0014      0.010     -0.138      0.890      -0.021       0.018
+==============================================================================
+Omnibus:                    32623.517   Durbin-Watson:                   1.936
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):        276620274.629
+Skew:                         -12.925   Prob(JB):                         0.00
+Kurtosis:                     613.820   Cond. No.                         9.73
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+
+	correlation	p-value
+upos_ADJ	0.028408	1.527352e-04
+upos_ADP	-0.039914	1.030420e-07
+upos_ADV	-0.042124	1.952094e-08
+upos_CCONJ	-0.032582	1.404565e-05
+upos_DET	-0.041247	3.817508e-08
+upos_NOUN	0.017510	1.961561e-02
+upos_NUM	-0.016568	2.724271e-02
+upos_PART	-0.016209	3.075075e-02
+upos_PRON	-0.037334	6.457999e-07
+upos_PROPN	0.043012	9.771807e-09
+upos_PUNCT	0.081164	2.371459e-27
+upos_SCONJ	-0.033033	1.065758e-05
+
+
+	correlation	p-value
+deprel_advmod	-0.029514	8.354298e-05
+deprel_amod	0.028626	1.358331e-04
+deprel_appos	0.023113	2.065792e-03
+deprel_case	-0.039805	1.116519e-07
+deprel_cc	-0.034081	5.543291e-06
+deprel_conj	-0.017663	1.856923e-02
+deprel_det	-0.041015	4.547086e-08
+deprel_fixed	-0.023582	1.672000e-03
+deprel_flat:foreign	0.021605	3.983103e-03
+deprel_mark	-0.033740	6.869800e-06
+deprel_punct	0.081056	2.776433e-27
+
+
+correlation	p-value
+case_0	-0.019674	0.008740
+case_Nom	0.016288	0.029953
+
+
+correlation	p-value
+ner_LOC	0.021392	4.355849e-03
+ner_NONE	-0.041504	3.140031e-08
+ner_ORG	0.016378	2.905772e-02
+ner_PER	0.031893	2.124947e-05
