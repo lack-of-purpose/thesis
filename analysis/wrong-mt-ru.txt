@@ -189,3 +189,46 @@ Nothing for case
 
 correlation	p-value
 ner_PER	0.03465	0.030262
+
+Subwords
+
+OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  score   R-squared:                       0.038
+Model:                            OLS   Adj. R-squared:                  0.036
+Method:                 Least Squares   F-statistic:                     19.34
+Date:                Thu, 13 Mar 2025   Prob (F-statistic):           7.93e-29
+Time:                        23:15:48   Log-Likelihood:                 1498.2
+No. Observations:                3947   AIC:                            -2978.
+Df Residuals:                    3938   BIC:                            -2922.
+Df Model:                           8                                         
+Covariance Type:            nonrobust                                         
+====================================================================================
+                       coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------------
+Intercept            0.1060      0.027      3.920      0.000       0.053       0.159
+C(sub, Sum)[S.1]    -0.0842      0.027     -3.098      0.002      -0.138      -0.031
+C(sub, Sum)[S.2]    -0.0336      0.028     -1.219      0.223      -0.088       0.020
+C(sub, Sum)[S.3]     0.0011      0.028      0.041      0.968      -0.054       0.057
+C(sub, Sum)[S.4]     0.0127      0.030      0.422      0.673      -0.046       0.072
+C(sub, Sum)[S.5]     0.0584      0.041      1.434      0.152      -0.021       0.138
+C(sub, Sum)[S.6]     0.0368      0.054      0.687      0.492      -0.068       0.142
+C(sub, Sum)[S.7]     0.0141      0.149      0.095      0.924      -0.277       0.306
+C(sub, Sum)[S.9]    -0.0490      0.107     -0.459      0.646      -0.258       0.160
+==============================================================================
+Omnibus:                      460.055   Durbin-Watson:                   1.892
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             3401.273
+Skew:                           0.294   Prob(JB):                         0.00
+Kurtosis:                       7.510   Cond. No.                         75.3
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+
+correlation	p-value
+sub_1	-0.180887	2.213086e-30
+sub_2	0.085469	7.542528e-08
+sub_3	0.111833	1.843910e-12
+sub_4	0.080611	3.955874e-07
+sub_5	0.055736	4.595965e-04

@@ -240,3 +240,46 @@ nothing for case
 
 correlation	p-value
 ner_T|tm	-0.02075	0.027958
+
+
+Subwords
+
+OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  score   R-squared:                       0.035
+Model:                            OLS   Adj. R-squared:                  0.035
+Method:                 Least Squares   F-statistic:                     68.32
+Date:                Thu, 13 Mar 2025   Prob (F-statistic):           7.32e-84
+Time:                        23:12:05   Log-Likelihood:                 5552.2
+No. Observations:               11280   AIC:                        -1.109e+04
+Df Residuals:                   11273   BIC:                        -1.104e+04
+Df Model:                           6                                         
+Covariance Type:            nonrobust                                         
+====================================================================================
+                       coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------------
+Intercept            0.1147      0.022      5.225      0.000       0.072       0.158
+C(sub, Sum)[S.1]    -0.0944      0.022     -4.288      0.000      -0.137      -0.051
+C(sub, Sum)[S.2]    -0.0558      0.022     -2.526      0.012      -0.099      -0.012
+C(sub, Sum)[S.3]    -0.0279      0.022     -1.253      0.210      -0.071       0.016
+C(sub, Sum)[S.4]    -0.0032      0.023     -0.141      0.888      -0.048       0.042
+C(sub, Sum)[S.5]     0.0039      0.026      0.151      0.880      -0.047       0.055
+C(sub, Sum)[S.6]     0.0629      0.038      1.646      0.100      -0.012       0.138
+==============================================================================
+Omnibus:                     2149.043   Durbin-Watson:                   1.912
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):            18135.613
+Skew:                           0.677   Prob(JB):                         0.00
+Kurtosis:                       9.062   Cond. No.                         49.4
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+
+correlation	p-value
+sub_1	-0.169738	1.124673e-73
+sub_2	0.066603	1.432946e-12
+sub_3	0.109233	2.739172e-31
+sub_4	0.086797	2.586003e-20
+sub_5	0.044419	2.365550e-06
+sub_6	0.034566	2.407860e-04
