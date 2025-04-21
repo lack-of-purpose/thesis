@@ -9,7 +9,7 @@ import optuna
 from optuna.samplers import TPESampler
 import os
 
-os.environ["WANDB_PROJECT"]="xlm-r-ft-optuna-95-100"
+os.environ["WANDB_PROJECT"]="xlm-r-fine-tuning-75-85"
 os.environ["WANDB_LOG_MODEL"]="false"
 os.environ["WANDB_WATCH"]="false"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
@@ -62,7 +62,7 @@ def objective(trial):
     )
     config = dict(trial.params)
     config["trial.number"] = trial.number
-    wandb.init(project="xlm-r-ft-optuna-95-100", config=config, reinit=True) 
+    wandb.init(project="xlm-r-fine-tuning-75-85", config=config, reinit=True) 
 
     trainer.train()
     metrics = trainer.evaluate()
@@ -70,9 +70,9 @@ def objective(trial):
 
 if __name__ == "__main__":
     model_checkpoint = "xlm-roberta-base"
-    df_train = pd.read_csv('training--95-tgt.csv', sep='|', quoting=csv.QUOTE_NONE, encoding='utf-8')
-    df_test = pd.read_csv('test--95-tgt.csv', sep='|', encoding='utf-8')
-    df_val = pd.read_csv('validation--95-tgt.csv', sep='|', encoding='utf-8')
+    df_train = pd.read_csv('training-75-85.csv', sep='|', quoting=csv.QUOTE_NONE, encoding='utf-8')
+    df_test = pd.read_csv('test-75-85.csv', sep='|', encoding='utf-8')
+    df_val = pd.read_csv('validation-75-85.csv', sep='|', encoding='utf-8')
 
     df_train['labels'] = df_train['labels'].map({'mt': 0, 'human': 1})
     df_test['labels'] = df_test['labels'].map({'mt': 0, 'human': 1})
